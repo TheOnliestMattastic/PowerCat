@@ -338,13 +338,15 @@ function Invoke-PowerCat {
     $sourceDirPath = $SourceDir.TrimEnd([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
     $Files = $Files | Where-Object {
       $file = $_
-      $relativePath = $file.FullName.Substring($sourceDirPath.Length).TrimStart('\', '/')
+      $relativePath = $file.FullName.Substring($sourceDirPath.Length).Replace('\', '/').TrimStart('/')
             
       # Check catignore patterns
       $shouldIgnore = $false
       foreach ($pattern in $IgnorePatterns) {
+        # Normalize pattern to forward slashes for matching
+        $normalizedPattern = $pattern.Replace('\', '/')
         # Check against relative path or filename
-        if ($relativePath -like $pattern -or $file.Name -like $pattern) {
+        if ($relativePath -like $normalizedPattern -or $file.Name -like $normalizedPattern) {
           $shouldIgnore = $true
           break
         }
