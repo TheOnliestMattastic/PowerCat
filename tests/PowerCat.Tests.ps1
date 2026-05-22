@@ -497,6 +497,72 @@ function HelloWorld {
     }
   }
 
+  Context "DX features (Dry-run and Verbose)" {
+    BeforeAll {
+      $script:tempDirDX = Join-Path ([System.IO.Path]::GetTempPath()) "PowerCatDXTest_$([System.Guid]::NewGuid())"
+      New-Item -ItemType Directory -Path $script:tempDirDX -Force | Out-Null
+      Set-Content -Path (Join-Path $script:tempDirDX "file1.ps1") -Value "Content1"
+      Set-Content -Path (Join-Path $script:tempDirDX "file2.ps1") -Value "Content2"
+    }
+
+    AfterAll {
+      Remove-Item -Path $script:tempDirDX -Recurse -Force -ErrorAction SilentlyContinue
+    }
+
+    It "Lists files with -WhatIf and does not produce output" {
+      $result = Invoke-PowerCat -s $script:tempDirDX -Powershell -WhatIf | Out-String
+      $result | Should -Match "Dry run: The following files would be bundled"
+      $result | Should -Match "file1.ps1"
+      $result | Should -Match "file2.ps1"
+      # Should not produce file contents
+      $result | Should -Not -Match "Content1"
+      $result | Should -Not -Match "Content2"
+    }
+
+    It "Outputs verbose info with -Verbose" {
+      $verboseResult = Invoke-PowerCat -s $script:tempDirDX -Powershell -Verbose 4>&1 | Out-String
+      $verboseResult | Should -Match "Processing file"
+    }
+
+    It "Outputs directory tree with -IncludeTree" {
+      $result = Invoke-PowerCat -s $script:tempDirDX -Powershell -IncludeTree | Out-String
+      $result | Should -Match "=== Directory Tree ==="
+      $result | Should -Match "file1.ps1"
+      $result | Should -Match "file2.ps1"
+    }
+  }
+
+  Context "Configuration and Context" {
+    It "Merges global and local catignore" {
+      $tempDir = Join-Path ([System.IO.Path]::GetTempPath()) "PowerCatIgnoreTest_$([System.Guid]::NewGuid())"
+      $catIgnorePath = Join-Path ([System.IO.Path]::GetTempPath()) ".catignore_test"
+      New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
+      $subDir = Join-Path $tempDir "sub"
+      New-Item -ItemType Directory -Path $subDir -Force | Out-Null
+      
+      $ignoreFile = Join-Path $subDir "ignoreMe.ps1"
+      Set-Content -Path $ignoreFile -Value "Ignore"
+      $keepFile = Join-Path $tempDir "keepMe.ps1"
+      Set-Content -Path $keepFile -Value "Keep"
+      
+      # Ignore by filename pattern
+      Set-Content -Path $catIgnorePath -Value "ignoreMe.ps1"
+      $oldCatIgnore = $env:CATIGNORE_PATH
+      $env:CATIGNORE_PATH = $catIgnorePath
+      try {
+        $result = Invoke-PowerCat -s $tempDir -Recurse -Powershell | Out-String
+        $result | Should -Not -Match "ignoreMe.ps1"
+        $result.ToString() | Should -Match "keepMe.ps1"
+        }
+
+      finally {
+        Remove-Item -Path $catIgnorePath -Force -ErrorAction SilentlyContinue
+        Remove-Item -Path $tempDir -Recurse -Force -ErrorAction SilentlyContinue
+        $env:CATIGNORE_PATH = $oldCatIgnore
+      }
+    }
+  }
+
   Context "Statistics reporting" {
     BeforeAll {
       $tempDir = Join-Path ([System.IO.Path]::GetTempPath()) "PowerCatStatsTest_$([System.Guid]::NewGuid())"
