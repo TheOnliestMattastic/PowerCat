@@ -335,16 +335,13 @@ function Invoke-PowerCat {
 
   # Filter out ignored files and by size
   if ($IgnorePatterns.Count -gt 0 -or $MinSize -gt 0 -or $MaxSize -gt 0) {
+    $sourceDirPath = $SourceDir.TrimEnd([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
     $Files = $Files | Where-Object {
       $file = $_
-      $sourceDirPath = $SourceDir.TrimEnd([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
       $relativePath = $file.FullName.Substring($sourceDirPath.Length).TrimStart('\', '/')
             
       # Check catignore patterns
       $shouldIgnore = $false
-      $sourceDirPath = $SourceDir.TrimEnd([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
-      $relativePath = $file.FullName.Substring($sourceDirPath.Length).TrimStart('\', '/')
-            
       foreach ($pattern in $IgnorePatterns) {
         # Check against relative path or filename
         if ($relativePath -like $pattern -or $file.Name -like $pattern) {
