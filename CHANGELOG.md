@@ -1,8 +1,16 @@
 # Changelog
 
-All notable changes to POWERcat are documented in this file.
+All notable changes to PowerCat are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### ✨ Added
+- `-WhatIf` (Dry-run) mode to preview files before bundling.
+- `-IncludeTree` to prepend a directory structure tree to the output.
+- Global/User `.catignore` support via `$HOME/.catignore` or `CATIGNORE_PATH`.
+- `-Verbose` output for tracking processing progress.
 
 ## [2.0.0] - 2025-12-21
 
@@ -20,7 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### ✅ Improved
 
 - Positional `SourceDir` clarified as the first required parameter.
-- Script wrapper (`scripts/POWERcat.ps1`) now mirrors module behavior and accepts the same flags.
+- Script wrapper (`scripts/PowerCat.ps1`) now mirrors module behavior and accepts the same flags.
 - Expanded Pester tests to cover new behaviors and script parity.
 
 ### 🧭 Migration
@@ -42,8 +50,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - **Extension filters** — Default `.md` plus switches (`-Bash`, `-PowerShell`, `-HTML`, `-CSS`, `-Lua`) or custom via `-Extensions`
 - **Sorting options** — Control file order with `-Sort Name|Extension|LastWriteTime|Length`
 - **Catignore support** — Exclude files and directories with a `.gitignore`-style `catignore` file
-- **Command aliases** — Quick commands `POWERcat`, `pcat`, `concat` all point to `Invoke-POWERcat`
-- **Native help system** — Full comment-based help via `Get-Help Invoke-POWERcat`
+- **Command aliases** — Quick commands `PowerCat`, `pcat`, `concat` all point to `Invoke-PowerCat`
+- **Native help system** — Full comment-based help via `Get-Help Invoke-PowerCat`
 - **Cross-platform support** — Windows, Linux (via PowerShell Core), macOS
 
 ### 🛠️ Infrastructure
@@ -58,7 +66,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - **Comprehensive README** — Overview, features, examples, and use cases
 - **Native PowerShell help** — Full documentation via `Get-Help` cmdlet
 - **Usage examples** — Real-world scenarios for bundling, LLM sharing, and token estimation
-- **Feature comparison table** — POWERcat vs. standard `cat`/`Get-Content` for clear value proposition
+- **Feature comparison table** — PowerCat vs. standard `cat`/`Get-Content` for clear value proposition
 
 ### 🎯 Features for AI & LLMs
 
@@ -90,7 +98,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [ ] **Batch operations** — Process multiple source directories in one command
 - [ ] **Custom separators** — User-defined file delimiters
-- [ ] **Preview mode** — Show what would be concatenated without bundling
 - [ ] **Parallel processing** — Faster bundling for large projects
 - [ ] **Cloud integration** — Direct upload to cloud storage or AI services
 - [ ] **GUI application** — Windows/cross-platform graphical interface
