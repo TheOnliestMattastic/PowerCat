@@ -65,6 +65,14 @@ Format for file headers: Markdown (default), JSON, or YAML.
 .PARAMETER Stats
 Display statistics: file count, character count, and estimated token usage (for AI context planning).
 
+.PARAMETER WhatIf
+Performs a dry run, listing all files that would be bundled without creating the output bundle.
+
+
+.PARAMETER IncludeTree
+
+Prepends a directory structure tree to the output, showing the hierarchy of processed files. The tree respects the recursive scope defined by `-Recurse`.
+
 .EXAMPLE
 Invoke-PowerCat "C:\Project" -o "C:\bundle.txt"
 Concatenates matching files from C:\Project into bundle.txt (use `-IncludeMarkdown` to include .md files).
@@ -83,7 +91,13 @@ Displays file count, character count, and estimated token usage (useful for AI c
 
 .NOTES
 Author: Matthew Poole Chicano
-License: GPL v3.0
+License: MIT
+
+CatIgnore behavior: POWERcat looks for ignores in the following order:
+1. $HOME/.catignore (Global/User level)
+2. Environment variable CATIGNORE_PATH (if set)
+3. 'catignore' in the SourceDir (Project level)
+Patterns should use forward slashes (/) for cross-platform compatibility.
 
 .LINK
 https://github.com/TheOnliestMattastic/PowerCat
