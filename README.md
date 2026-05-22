@@ -82,7 +82,7 @@ See PowerCat in action:
 
 ### Write bundled files to `.txt` and view with `nano`
 
-![Demo of PowerCat budling files and varifying with `nano`](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3B1dmluaDFkbTl3YWNueDA4am93Ym5vcGY3bjZpdXd3bGV1M3htbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BeM9Uxe31ol7EzIQ8L/giphy.gif)
+![Demo of PowerCat bundling files and verifying with `nano`](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3B1dmluaDFkbTl3YWNueDA4am93Ym5vcGY3bjZpdXd3bGV1M3htbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BeM9Uxe31ol7EzIQ8L/giphy.gif)
 
 ### Pipe bundled bash files to `bat` for syntax highlighting
 
