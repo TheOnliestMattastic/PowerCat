@@ -190,7 +190,11 @@ function Invoke-PowerCat {
     [string]$HeaderFormat = "Markdown",
 
     [Alias("sta")]
-    [switch]$Stats
+    [switch]$Stats,
+
+    [switch]$WhatIf,
+
+    [switch]$IncludeTree
   )
 
   # Extend $Extensions based on switches
@@ -283,24 +287,35 @@ function Invoke-PowerCat {
   # Read catignore patterns
   $IgnorePatterns = @()
   if (-not $NoCatIgnore) {
-    # Determine catignore file path
+    # 1. Global/User catignore
+    $userCatIgnore = Join-Path $HOME ".catignore"
+    if (Test-Path $userCatIgnore) {
+      $IgnorePatterns += Get-Content -Path $userCatIgnore | Where-Object { $_ -and -not $_.StartsWith('#') } | ForEach-Object { $_.Trim() }
+    }
+    # For testing in non-standard environments, allow override via env var
+    if ($env:CATIGNORE_PATH -and (Test-Path $env:CATIGNORE_PATH)) {
+        $IgnorePatterns += Get-Content -Path $env:CATIGNORE_PATH | Where-Object { $_ -and -not $_.StartsWith('#') } | ForEach-Object { $_.Trim() }
+    }
+
+    # 2. Local catignore
     if (-not $CatIgnore) {
       $CatIgnore = Join-Path -Path $SourceDir -ChildPath "catignore"
     }
     else {
-      # Expand user-provided catignore path
       $CatIgnore = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($CatIgnore)
     }
 
-    # Read patterns if catignore exists
-    if (Test-Path -Path $CatIgnore) {
-      $IgnorePatterns = @(Get-Content -Path $CatIgnore | 
+    if (Test-Path $CatIgnore) {
+      $IgnorePatterns += Get-Content -Path $CatIgnore | 
         Where-Object { $_ -and -not $_.StartsWith('#') } |
-        ForEach-Object { $_.Trim() })
+        ForEach-Object { $_.Trim() }
     }
-  }
+    $IgnorePatterns = $IgnorePatterns | Select-Object -Unique
+    }
 
-  # Get all files in the directory (single scan, filter by extension in PowerShell)
+    # Get all files in the directory (single scan, filter by extension in PowerShell)
+
+
   $getChildItemParams = @{
     Path = $SourceDir
     File = $true
@@ -327,7 +342,11 @@ function Invoke-PowerCat {
             
       # Check catignore patterns
       $shouldIgnore = $false
+      $sourceDirPath = $SourceDir.TrimEnd([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
+      $relativePath = $file.FullName.Substring($sourceDirPath.Length).TrimStart('\', '/')
+            
       foreach ($pattern in $IgnorePatterns) {
+        # Check against relative path or filename
         if ($relativePath -like $pattern -or $file.Name -like $pattern) {
           $shouldIgnore = $true
           break
@@ -371,6 +390,14 @@ function Invoke-PowerCat {
     $Files = $Files | Select-Object -Unique
   }
 
+  if ($WhatIf) {
+    Write-Output "Dry run: The following files would be bundled:"
+    foreach ($file in $Files) {
+      Write-Output $file.FullName
+    }
+    return
+  }
+
   switch ($Sort) {
     "Name" { $Files = $Files | Sort-Object Name }
     "Extension" { $Files = $Files | Sort-Object Extension, Name }
@@ -381,7 +408,24 @@ function Invoke-PowerCat {
   # Build output content in a string array for efficiency
   $OutputContent = @()
 
+  # Include Tree structure
+  if ($IncludeTree) {
+    $tree = Get-ChildItem -Path $SourceDir -Recurse | ForEach-Object {
+      $relativePath = $_.FullName.Substring($SourceDir.TrimEnd('\/').Length + 1)
+      $depth = ($relativePath.Split([System.IO.Path]::DirectorySeparatorChar).Count - 1)
+      if ($_.PSIsContainer) {
+        ("  " * $depth) + "|-- " + $_.Name + "/"
+      } else {
+        ("  " * $depth) + "|-- " + $_.Name
+      }
+    }
+    $OutputContent += "=== Directory Tree ==="
+    $OutputContent += $tree
+    $OutputContent += ""
+  }
+
   foreach ($file in $Files) {
+    Write-Verbose "Processing file: $($file.FullName)"
     # Generate header based on format
     $header = switch ($HeaderFormat) {
       "JSON" { ConvertTo-Json @{ file = $file.Name } -Compress }
