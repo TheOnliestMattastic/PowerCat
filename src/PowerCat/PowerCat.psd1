@@ -3,7 +3,7 @@
     RootModule        = 'PowerCat.psm1'
 
     # Version number of this module
-    ModuleVersion     = '2.0.0'
+    ModuleVersion     = '3.0.0'
 
     # Supported PSEditions
     CompatiblePSEditions = @('Desktop','Core')
@@ -12,13 +12,13 @@
     GUID              = '4393a30b-14ea-4597-bfd3-dcabd3f3acc9'  # Use New-Guid
 
     # Author of this module
-    Author            = 'Matthew Poole Chicano'
+    Author            = 'The Onliest Mattastic'
 
     # Company or vendor of this module
-    CompanyName       = 'Independent Developer'
+    CompanyName       = 'The Onliest Mattastic'
 
     # Copyright statement
-    Copyright         = '(c) 2025 Matthew Poole Chicano. All rights reserved.'
+    Copyright         = '(c) 2025 The Onliest Mattastic. All rights reserved.'
 
     # Description of the functionality provided by this module
     Description       = 'PowerCat is a single-shot concatenator that bundles markdown and code files into one text file. Outputs to stdout (Unix cat-style) or file. Supports recursion, Markdown fencing, custom extensions, sorting, minification, and token estimation for AI context planning.'
@@ -55,8 +55,6 @@
             # A URL to an icon representing this module
             IconUri = 'https://raw.githubusercontent.com/PowerShell/PowerShell/master/assets/ps_black_64.svg'
 
-            # Release notes
-            ReleaseNotes = 'v2.0.0: Breaking change — no implicit .md; opt-in extensions, added -IncludeMarkdown, -ExcludeExtensions, -ForceOverwrite, comma-separated -Extensions, improved script parity and tests. See https://github.com/TheOnliestMattastic/PowerCat/blob/main/ReleaseNotes.md'
         }
     }
 }
