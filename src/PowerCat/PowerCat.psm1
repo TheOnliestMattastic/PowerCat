@@ -93,7 +93,7 @@ Displays file count, character count, and estimated token usage (useful for AI c
 Author: Matthew Poole Chicano
 License: MIT
 
-CatIgnore behavior: POWERcat looks for ignores in the following order:
+CatIgnore behavior: PowerCat looks for ignores in the following order:
 1. $HOME/.catignore (Global/User level)
 2. Environment variable CATIGNORE_PATH (if set)
 3. 'catignore' in the SourceDir (Project level)
