@@ -74,7 +74,7 @@ See PowerCat in action:
 
 ### Display help with the `-h` flag
 
-![Demo of PowerCat with help flat](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXBkZzl0bGExamhhZmRzeHNtbzk0ajh6M3VtNjhvcHZ4NWwyMzgyeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lvK3qtQj34pWwHch1H/giphy.gif)
+![Demo of PowerCat with help flag](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXBkZzl0bGExamhhZmRzeHNtbzk0ajh6M3VtNjhvcHZ4NWwyMzgyeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lvK3qtQj34pWwHch1H/giphy.gif)
 
 ### Bundle files with `-Stats` and output to stdout
 
