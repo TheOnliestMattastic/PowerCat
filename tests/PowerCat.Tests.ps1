@@ -547,6 +547,7 @@ function HelloWorld {
       
       # Ignore by filename pattern
       Set-Content -Path $catIgnorePath -Value "ignoreMe.ps1"
+      $oldCatIgnore = $env:CATIGNORE_PATH
       $env:CATIGNORE_PATH = $catIgnorePath
       try {
         $result = Invoke-PowerCat -s $tempDir -Recurse -Powershell | Out-String
@@ -557,7 +558,7 @@ function HelloWorld {
       finally {
         Remove-Item -Path $catIgnorePath -Force -ErrorAction SilentlyContinue
         Remove-Item -Path $tempDir -Recurse -Force -ErrorAction SilentlyContinue
-        $env:CATIGNORE_PATH = $null
+        $env:CATIGNORE_PATH = $oldCatIgnore
       }
     }
   }
