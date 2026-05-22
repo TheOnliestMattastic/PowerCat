@@ -410,7 +410,9 @@ function Invoke-PowerCat {
 
   # Include Tree structure
   if ($IncludeTree) {
-    $tree = Get-ChildItem -Path $SourceDir -Recurse | ForEach-Object {
+    # Generate tree from the full file list (directories + files)
+    $allFiles = Get-ChildItem @getChildItemParams
+    $tree = $allFiles | ForEach-Object {
       $relativePath = $_.FullName.Substring($SourceDir.TrimEnd('\/').Length + 1)
       $depth = ($relativePath.Split([System.IO.Path]::DirectorySeparatorChar).Count - 1)
       if ($_.PSIsContainer) {
