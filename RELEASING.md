@@ -33,7 +33,7 @@ This checklist ensures that every release is consistent across GitHub and the Po
 
 ## 🌒 1. Bump the Module Version
 
-- Open `PowerCat.psd1`.
+- Open `src/PowerCat/PowerCat.psd1`.
 - Update the `ModuleVersion` field:
 
 ```powershell
@@ -45,7 +45,7 @@ ModuleVersion = '1.0.X'
 ## 🌓 2. Commit the Change
 
 ```powershell
-git add PowerCat.psd1
+git add src/PowerCat/PowerCat.psd1
 git commit -m "Bump version to v1.0.X"
 git push origin main
 ```
@@ -85,7 +85,7 @@ Find-Module PowerCat
 
 - Go to your repo → **Releases** → **Draft a new release**.
 - Select the tag `v1.0.X`.
-- Copy the `ReleaseNotes` from `PowerCat.psd1` or `CHANGELOG.md`.
+- Copy the `ReleaseNotes` from `src/PowerCat/PowerCat.psd1` or `CHANGELOG.md`.
 
 ## 🌘 Quick Summary
 
