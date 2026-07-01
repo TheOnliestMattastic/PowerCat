@@ -8,12 +8,11 @@
 [![Portfolio](https://img.shields.io/badge/Portfolio-bd93f9?style=for-the-badge&logo=githubpages&logoColor=white&labelColor=6272a4)](https://theonliestmattastic.github.io/)
 [![GitHub](https://img.shields.io/badge/GitHub-Profile-bd93f9?style=for-the-badge&logo=github&logoColor=white&labelColor=6272a4)](https://github.com/theonliestmattastic)
 
-## 🔭 Overview
+## 🔭 About
 
-**PowerCat** is a single-shot concatenator for bundling markdown and code into one clean text file.
-It's the feline cousin of Unix `cat`—polished for PowerShell, built for sharing code with recruiters, collaborators, and LLMs.
+**PowerCat** bundles code into one clean, structured file—perfect for sharing with recruiters, teams, and LLMs. Think Unix `cat` meets PowerShell polish: minifiable, fenceable, token-aware.
 
-> **Breaking change (v2.0.0):** PowerCat no longer includes `.md` files by default. This was an intentional, breaking change to avoid accidentally bundling documentation. To restore previous behavior, explicitly opt-in with `-IncludeMarkdown` or add `-Extensions ".md"`. See ReleaseNotes for migration guidance.
+> **Breaking change (v2.0.0):** PowerCat no longer includes `.md` files by default. This was an intentional, breaking change to avoid accidentally bundling documentation. To restore previous behavior, use `-IncludeMarkdown`.
 
 ## ✨ Features
 
@@ -74,23 +73,23 @@ See PowerCat in action:
 
 ### Display help with the `-h` flag
 
-![Demo of PowerCat with help flag](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXBkZzl0bGExamhhZmRzeHNtbzk0ajh6M3VtNjhvcHZ4NWwyMzgyeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lvK3qtQj34pWwHch1H/giphy.gif)
+![Demo of PowerCat with help flag](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXBkZzl0bGExamhhZmRzeHNtbzk0ajh6M3VtNjhvcHZ4NWwyMzgyeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lvK3qtQj34pWwHch2R/giphy.gif)
 
 ### Bundle files with `-Stats` and output to stdout
 
-![Demo of PowerCat with stats flag](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGxuOHBiNDVkOTU1ZGJ5bTVsZDhhODQ0bDFrZGx2N25iYmw3eWcycCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GGuPOvVAg61zc0WxE9/giphy.gif)
+![Demo of PowerCat with stats flag](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGxuOHBiNDVkOTU1ZGJ5bTVsZDhhODQ0bDFrZGx2N25iYmw3eWcycCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GGuPOvVAg61zc0WGnR/giphy.gif)
 
 ### Write bundled files to `.txt` and view with `nano`
 
-![Demo of PowerCat bundling files and verifying with `nano`](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3B1dmluaDFkbTl3YWNueDA4am93Ym5vcGY3bjZpdXd3bGV1M3htbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BeM9Uxe31ol7EzIQ8L/giphy.gif)
+![Demo of PowerCat bundling files and verifying with `nano`](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3B1dmluaDFkbTl3YWNueDA4am93Ym5vcGY3bjZpdXd3bGV1M3htbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NVvdLmVJiW5KnoRvXp/giphy.gif)
 
 ### Pipe bundled bash files to `bat` for syntax highlighting
 
-![Demo of PowerCat piping output to `bat` with syntax highlighting](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3d5bnhhM2V1N210MmxvNDQwMzY3b3d1MW90ZHQxMTF1NDd5Y3ZmYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WUnH3gHQRTdDzrxxO8/giphy.gif)
+![Demo of PowerCat piping output to `bat` with syntax highlighting](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3d5bnhhM2V1N210MmxvNDQwMzY3b3d1MW90ZHQxMTF1NDd5Y3ZmYSZlcD12MV9pbnRlcm5hbF9naW[...]
 
 ### Pipe bundled output to `lolcat` for rainbow terminal fun
 
-![Demo of PowerCat piping output to `lolcat`](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXJ4NmJxd2cxbWxyeTNodGFuN3Nyb2hrbzRrdjVqYWpmOW51bXFveSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ULnasHsrwyqu2SxYVy/giphy.gif)
+![Demo of PowerCat piping output to `lolcat`](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXJ4NmJxd2cxbWxyeTNodGFuN3Nyb2hrbzRrdjVqYWpmOW51bXFveSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ULnas4CklTJSWLhAVz/giphy.gif)
 
 ## 🧪 Examples
 
